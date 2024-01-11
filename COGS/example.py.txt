@@ -1,0 +1,11 @@
+from colorama import Fore, init as coloramainit
+coloramainit()
+import guilded
+from guilded.ext import commands
+
+class COGNAME(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+def setup(bot):
+	bot.add_cog(COGNAME(bot))
