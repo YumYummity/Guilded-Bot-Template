@@ -8,3 +8,4 @@ This template includes:
 - Permission missing error handling (when a permission is missing, it'll tell the user exactly what permissions are missing)
 - Eval/exec
 - Config file
+- Replies on ping
