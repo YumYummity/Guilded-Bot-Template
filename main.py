@@ -21,18 +21,18 @@ class COLORS():
 
     # [GUILDED]
     guilded_logs = Fore.LIGHTYELLOW_EX
-    # [COGS]
-    cog_logs = Fore.BLUE
     # [INFO]
     info_logs = Fore.CYAN
+    # [COGS]
+    cog_logs = info_logs
     # [COMMAND]
-    command_logs = "\033[38;2;255;165;0m"
+    command_logs = info_logs
     # [SUCCESS]
     success_logs = Fore.LIGHTGREEN_EX
     # [ERROR]
     error_logs = Fore.RED
     # [WARN]
-    warn_logs = Fore.LIGHTRED_EX
+    warn_logs = "\033[38;2;255;165;0m" # This is orange!
 
     # Normal item names (inputted text from user usually is an item)
     item_name = Fore.LIGHTBLUE_EX
