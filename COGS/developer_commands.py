@@ -1,7 +1,3 @@
-import traceback
-
-from colorama import Fore, init as coloramainit
-coloramainit()
 import guilded
 from guilded.ext import commands
 
@@ -24,10 +20,9 @@ class developer(commands.Cog):
             try:
                 await aexec(cmd, ctx.message)
             except Exception as e:
-                result = ("".join(traceback.format_exception(e, e, e.__traceback__))).replace('`', '\`')
-                print(result)
-                await ctx.message.reply(f'**Eval failed with Exception.**\nPlease check console.')
+                self.bot.traceback(e)
                 await ctx.message.add_reaction(90002175)
+                await ctx.message.reply(f'**Eval failed with Exception.**\nPlease check console.', private=ctx.message.private)
             else:
                 await ctx.message.add_reaction(90002171)
 

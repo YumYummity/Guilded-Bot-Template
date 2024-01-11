@@ -1,7 +1,3 @@
-import traceback
-
-from colorama import Fore, init as coloramainit
-coloramainit()
 import guilded
 from guilded.ext import commands
 
@@ -18,11 +14,11 @@ class COGNAME(commands.Cog):
             cog_name = f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog_name
         try:
             self.bot.load_extension(cog_name)
+            self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Loaded cog {self.bot.COLORS.item_name}{cog_name}')
         except Exception as e:
             em = guilded.Embed(description="Failed to load cog.", color=0x363942)
             await ctx.reply(embed=em, private=ctx.message.private)
-            tb = ''.join(traceback.format_exception(e, e, e.__traceback__))
-            print(tb)
+            self.bot.traceback(e)
         else:
             em = guilded.Embed(description="**Cog loaded.**", color=0x363942)
             await ctx.reply(embed=em, private=ctx.message.private)
@@ -36,6 +32,7 @@ class COGNAME(commands.Cog):
 
         if cog_name in self.bot.extensions:
             self.bot.unload_extension(cog_name)
+            self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Unloaded cog {self.bot.COLORS.item_name}{cog_name}')
             em = guilded.Embed(description="**Cog unloaded.**", color=0x363942)
             await ctx.reply(embed=em, private=ctx.message.private)
         else:
@@ -52,11 +49,11 @@ class COGNAME(commands.Cog):
         try:
             self.bot.unload_extension(cog_name)
             self.bot.load_extension(cog_name)
+            self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Reloaded cog {self.bot.COLORS.item_name}{cog_name}')
         except Exception as e:
             em = guilded.Embed(description="Failed to reload cog.", color=0x363942)
             await ctx.reply(embed=em, private=ctx.message.private)
-            tb = ''.join(traceback.format_exception(e, e, e.__traceback__))
-            print(tb)
+            self.bot.traceback(e)
         else:
             em = guilded.Embed(description="**Cog reloaded.**", color=0x363942)
             await ctx.reply(embed=em, private=ctx.message.private)

@@ -1,5 +1,3 @@
-from colorama import Fore, init as coloramainit
-coloramainit()
 import guilded
 from guilded.ext import commands
 
