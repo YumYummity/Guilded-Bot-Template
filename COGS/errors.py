@@ -9,7 +9,7 @@ class errors(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.Cog.listener(name="command_error")
+    @commands.Cog.listener(name="on_command_error")
     async def ANERROROCCURED(self, ctx:commands.Context, error):
         if isinstance(error, commands.CommandNotFound):
             return

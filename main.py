@@ -52,6 +52,7 @@ async def getprefix(bot: commands.Bot, message: guilded.Message) -> list:
 
 bot = commands.Bot(command_prefix=getprefix, bot_id = CONFIGS.botid, experimental_event_style=True, owner_ids=CONFIGS.owners)
 bot.CONFIGS = CONFIGS
+bot.remove_command("help")
 
 @bot.event
 async def on_ready():
