@@ -24,9 +24,9 @@ class COLORS():
     # [INFO]
     info_logs = Fore.CYAN
     # [COGS]
-    cog_logs = info_logs
+    cog_logs = Fore.BLUE
     # [COMMAND]
-    command_logs = info_logs
+    command_logs = Fore.BLUE
     # [SUCCESS]
     success_logs = Fore.LIGHTGREEN_EX
     # [ERROR]
