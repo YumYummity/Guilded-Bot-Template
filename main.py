@@ -175,9 +175,10 @@ async def on_ready():
         except commands.errors.ExtensionAlreadyLoaded:
             pass
 
-    bot.info(f'Bot ready! Logged in as {COLORS.user_name}{bot.user}')
+    bot.success(f'Bot ready! Logged in as {COLORS.user_name}{bot.user}')
 
 if __name__ == '__main__':
+    bot.info("Starting bot...")
     bot.run(CONFIGS.token)
 
 
