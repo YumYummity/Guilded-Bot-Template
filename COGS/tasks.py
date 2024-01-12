@@ -11,8 +11,9 @@ class tasks(commands.Cog):
     async def change_status(self):
         while True:
             # [emoji id / None, status message, delay]
+            server_count = len(await self.bot.fetch_servers())
             statuses = [
-                [None, f"Watching {len(await self.bot.fetch_servers())} servers!", 10],
+                [None, f"Watching {server_count} server{'s' if server_count != 1 else ''}!", 10],
                 [None, f"Helping you build Guilded bots!", 10],
                 [None, f"https://github.com/YumYummity/Guilded-Bot-Template/tree/main", 10]
             ]
