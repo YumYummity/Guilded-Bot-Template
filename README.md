@@ -19,6 +19,8 @@ This template includes:
 - Use `bot.error()` to print error messages.
 - Use `bot.success()` to print success messages.
 - Use `bot.warn()` to print warning messages.
+![image](https://github.com/YumYummity/Guilded-Bot-Template/assets/103061664/4326b287-ebf3-4e31-a175-348bf1342cf1)
+
 
 # Setup
 1. Rename `config.json.txt` to `config.json`
