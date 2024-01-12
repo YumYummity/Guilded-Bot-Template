@@ -180,10 +180,12 @@ async def on_ready():
     bot.success(f'Bot ready! Logged in as {COLORS.user_name}{bot.user}')
 
 if __name__ == '__main__':
+    console_logger.info("\n")
     bot.info("Starting bot...")
     try:
         bot.run(CONFIGS.token)
     except Exception as e:
         bot.traceback(e)
     bot.error("Bot crashed")
+    console_logger.info("\n")
 
