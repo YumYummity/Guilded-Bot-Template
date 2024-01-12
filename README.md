@@ -34,7 +34,8 @@ This template includes:
 - You can use `bot.COLORS.normal_message` to format normal text in logs.
 - `bot.COLORS.timestamp` exists as a color for the timestamps in front of a log message. You can use it to highlight any timestamps you may have.
 ### Changing Colors
-
+Edit the following `class` in `main.py` to change colors.
+![image](https://github.com/YumYummity/Guilded-Bot-Template/assets/103061664/2642ead3-3c6d-4b24-8a4f-918d5ca93908)
 
 
 # Setup
