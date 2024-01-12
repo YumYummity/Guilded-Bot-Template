@@ -118,10 +118,23 @@ def _print(*args, **kwargs):
     console_logger.info(remove_formatting(" ".join(args)))
 
 def _infoprint(*args, **kwargs):
-    if args:
-        args = (f"{COLORS.info_logs}[INFO]{COLORS.normal_message}" + " " + str(args[0]),) + args[1:]
-    else:
-        args = (f"{COLORS.info_logs}[INFO]{COLORS.normal_message}",)
+    if args: args = (f"{COLORS.info_logs}[INFO]{COLORS.normal_message}" + " " + str(args[0]),) + args[1:]
+    else: args = (f"{COLORS.info_logs}[INFO]{COLORS.normal_message}",)
+    _print(*args, **kwargs)
+
+def _warnprint(*args, **kwargs):
+    if args: args = (f"{COLORS.warn_logs}[WARN]{COLORS.normal_message}" + " " + str(args[0]),) + args[1:]
+    else: args = (f"{COLORS.warn_logs}[WARN]{COLORS.normal_message}",)
+    _print(*args, **kwargs)
+
+def _errorprint(*args, **kwargs):
+    if args: args = (f"{COLORS.error_logs}[ERROR]{COLORS.normal_message}" + " " + str(args[0]),) + args[1:]
+    else: args = (f"{COLORS.error_logs}[ERROR]{COLORS.normal_message}",)
+    _print(*args, **kwargs)
+
+def _successprint(*args, **kwargs):
+    if args: args = (f"{COLORS.success_logs}[SUCCESS]{COLORS.normal_message}" + " " + str(args[0]),) + args[1:]
+    else: args = (f"{COLORS.success_logs}[SUCCESS]{COLORS.normal_message}",)
     _print(*args, **kwargs)
 
 def _tracebackprint(error: Exception):
@@ -145,8 +158,12 @@ def _tracebackprint(error: Exception):
 bot = commands.Bot(command_prefix=getprefix, bot_id = CONFIGS.botid, experimental_event_style=True, owner_ids=CONFIGS.owners, help_command=None)
 bot.CONFIGS = CONFIGS
 bot.COLORS = COLORS
+# Logging
 bot.print = _print
 bot.info = _infoprint
+bot.error = _errorprint
+bot.warn = _warnprint
+bot.success = _successprint
 bot.traceback = _tracebackprint
 
 @bot.event

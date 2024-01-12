@@ -9,3 +9,13 @@ This template includes:
 - Eval/exec
 - Config file
 - Replies on ping
+
+# Logging
+- Use `bot.traceback(Exception)` to log and format errors. Otherwise, they won't be logged properly.
+    - You can use `print()` for debug statements you don't want logged.
+- Use `bot.print()` to print things. Otherwise, it won't be logged properly. This will also add a timestamp.
+    - You can use `print()` for debug statements you don't want logged.
+- Use `bot.info()` to print info messages.
+- Use `bot.error()` to print error messages.
+- Use `bot.success()` to print success messages.
+- Use `bot.warn()` to print warning messages.
