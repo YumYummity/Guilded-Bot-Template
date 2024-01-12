@@ -128,11 +128,18 @@ def _tracebackprint(error: Exception):
     separator_line = "-" * 60
     
     traceback_lines = traceback.format_exception(error, error, error.__traceback__)
+
+    console_logger.info(separator_line)
     print(separator_line)
+
     errortimestamp = datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]
+
     for line in traceback_lines:
         for subline in line.split('\n'):
             print(f"{COLORS.timestamp}[{errortimestamp}]{COLORS.reset} {COLORS.error_logs}[ERROR]{COLORS.normal_message} {subline}")
+            console_logger.info(f"[{errortimestamp}] [ERROR] {subline}")
+    
+    console_logger.info(separator_line)
     print(separator_line)
 
 bot = commands.Bot(command_prefix=getprefix, bot_id = CONFIGS.botid, experimental_event_style=True, owner_ids=CONFIGS.owners, help_command=None)
