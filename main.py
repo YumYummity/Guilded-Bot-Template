@@ -6,7 +6,7 @@ from guilded.ext import commands
 from colorama import Fore, Back, Style, init as coloramainit
 coloramainit(autoreset=True)
 
-import json, os, glob, logging, traceback, re
+import json, os, glob, logging, traceback, re, signal, platform, sys
 import logging.handlers
 from datetime import datetime
 
@@ -182,10 +182,18 @@ async def on_ready():
 if __name__ == '__main__':
     console_logger.info("\n")
     bot.info("Starting bot...")
+
+    def on_bot_stopped(*args, **kwargs):
+        bot.info("Bot stopped")
+        console_logger.info("\n")
+        sys.exit(0)
+    if platform.system() in ["Darwin", "Linux"]:
+        signal.signal(signal.SIGHUP, on_bot_stopped)
+    elif platform.system() in ["Windows"]:
+        signal.signal(signal.SIGINT, on_bot_stopped) # Captures Ctrl + C, sadly can't capture console close (at least not easily)
+
     try:
         bot.run(CONFIGS.token)
     except Exception as e:
         bot.traceback(e)
         bot.error("Bot crashed")
-    bot.info("Bot stopped")
-    console_logger.info("\n")
