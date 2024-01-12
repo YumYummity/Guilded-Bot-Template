@@ -4,8 +4,8 @@ from guilded.ext import commands
 from colorama import Fore, Back, Style, init as coloramainit
 coloramainit(autoreset=True)
 
-import json, os, glob, logging, traceback
-from logging.handlers import RotatingFileHandler
+import json, os, glob, logging, traceback, re
+import logging.handlers
 from datetime import datetime
 
 class COLORS():
@@ -52,14 +52,34 @@ if not os.path.exists(errors_dir):
 
 # Configure the loggers
 # Guilded Logs -> Console
-logger = logging.getLogger('guilded')
-logger.setLevel(logging.INFO)
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter(f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]}]{COLORS.reset} {COLORS.guilded_logs}[GUILDED]{COLORS.normal_message} %(message)s")
-console_handler.setFormatter(formatter)
-logger.addHandler(console_handler)
+glogger = logging.getLogger('guilded')
+glogger.setLevel(logging.INFO)
+gconsole_handler = logging.StreamHandler()
+gconsole_handler.setLevel(logging.DEBUG)
+gformatter = logging.Formatter(f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]}]{COLORS.reset} {COLORS.guilded_logs}[GUILDED]{COLORS.normal_message} %(message)s")
+gconsole_handler.setFormatter(gformatter)
+glogger.addHandler(gconsole_handler)
 # Console -> Log Files
+class IncrementalRotatingFileHandler(logging.handlers.RotatingFileHandler):
+    def doRollover(self):
+        filename = os.path.basename(self.baseFilename).split('.')[0]
+        current_log_num = int(filename) if filename.isdigit() else 0
+        next_log_num = current_log_num + 1
+        while os.path.exists(os.path.join(os.path.dirname(self.baseFilename), f"{next_log_num}.txt")):
+            next_log_num += 1
+        new_log_path = os.path.join(os.path.dirname(self.baseFilename), f"{next_log_num}.txt")
+        self.stream.close()
+        self.stream = None
+        os.rename(self.baseFilename, new_log_path)
+        super().doRollover()
+console_logger = logging.Logger(name="console")
+handler = IncrementalRotatingFileHandler(
+    os.path.join(logs_dir, f"latest.txt"),
+    maxBytes=10*1024*1024, # 10mb
+    backupCount=100  # Keep up to 100 old log files
+)
+console_logger.addHandler(handler)
+glogger.addHandler(handler)
 
 class CONFIGS():
     '''
@@ -90,6 +110,12 @@ def _print(*args, **kwargs):
     else:
         args = (timestamp,)
     print(*args, **kwargs)
+    def remove_formatting(text):
+        ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
+        formatted_text = ansi_escape.sub('', text)
+        return formatted_text
+
+    console_logger.info(remove_formatting(" ".join(args)))
 
 def _infoprint(*args, **kwargs):
     if args:
