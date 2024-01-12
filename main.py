@@ -1,3 +1,5 @@
+debug_mode = False
+
 import guilded
 from guilded.ext import commands
 
@@ -53,7 +55,7 @@ if not os.path.exists(errors_dir):
 # Configure the loggers
 # Guilded Logs -> Console
 glogger = logging.getLogger('guilded')
-glogger.setLevel(logging.INFO)
+glogger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
 gconsole_handler = logging.StreamHandler()
 gconsole_handler.setLevel(logging.DEBUG)
 gformatter = logging.Formatter(f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]}]{COLORS.reset} {COLORS.guilded_logs}[GUILDED]{COLORS.normal_message} %(message)s")
