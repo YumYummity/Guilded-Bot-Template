@@ -181,6 +181,9 @@ async def on_ready():
 
 if __name__ == '__main__':
     bot.info("Starting bot...")
-    bot.run(CONFIGS.token)
-
+    try:
+        bot.run(CONFIGS.token)
+    except Exception as e:
+        bot.traceback(e)
+    bot.error("Bot crashed")
 
