@@ -39,6 +39,8 @@ This template includes:
 Edit the following `class` in `main.py` to change colors.
 ![image](https://github.com/YumYummity/Guilded-Bot-Template/assets/103061664/2642ead3-3c6d-4b24-8a4f-918d5ca93908)
 
+### Debug Mode
+You can change the variable `debug_mode` in `main.py` to turn on `guilded.py` debug.
 
 # Setup
 1. Rename `config.json.txt` to `config.json`
