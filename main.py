@@ -58,7 +58,7 @@ glogger = logging.getLogger('guilded')
 glogger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
 gconsole_handler = logging.StreamHandler()
 gconsole_handler.setLevel(logging.DEBUG)
-gformatter = logging.Formatter(f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]}]{COLORS.reset} {COLORS.guilded_logs}[GUILDED]{COLORS.normal_message} %(message)s")
+gformatter = logging.Formatter(f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]} UTC]{COLORS.reset} {COLORS.guilded_logs}[GUILDED]{COLORS.normal_message} %(message)s")
 gconsole_handler.setFormatter(gformatter)
 glogger.addHandler(gconsole_handler)
 # Console -> Log Files
@@ -106,7 +106,7 @@ async def getprefix(bot: commands.Bot, message: guilded.Message) -> list:
     return [CONFIGS.defaultprefix]
 
 def _print(*args, **kwargs):
-    timestamp = f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]}]{COLORS.reset}"
+    timestamp = f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]} UTC]{COLORS.reset}"
     if args:
         args = (timestamp + " " + str(args[0]),) + args[1:]
     else:
@@ -147,7 +147,7 @@ def _tracebackprint(error: Exception):
     console_logger.info(separator_line)
     print(separator_line)
 
-    errortimestamp = datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]
+    errortimestamp = datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3] + " UTC"
 
     for line in traceback_lines:
         for subline in line.split('\n'):
