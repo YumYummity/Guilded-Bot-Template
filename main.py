@@ -51,13 +51,15 @@ if not os.path.exists(errors_dir):
     os.makedirs(errors_dir)
 
 # Configure the loggers
+# Guilded Logs -> Console
 logger = logging.getLogger('guilded')
 logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
+console_handler.setLevel(logging.DEBUG)
 formatter = logging.Formatter(f"{COLORS.timestamp}[{datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]}]{COLORS.reset} {COLORS.guilded_logs}[GUILDED]{COLORS.normal_message} %(message)s")
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
+# Console -> Log Files
 
 class CONFIGS():
     '''
@@ -89,21 +91,29 @@ def _print(*args, **kwargs):
         args = (timestamp,)
     print(*args, **kwargs)
 
+def _infoprint(*args, **kwargs):
+    if args:
+        args = (f"{COLORS.info_logs}[INFO]{COLORS.normal_message}" + " " + str(args[0]),) + args[1:]
+    else:
+        args = (f"{COLORS.info_logs}[INFO]{COLORS.normal_message}",)
+    _print(*args, **kwargs)
+
 def _tracebackprint(error: Exception):
     separator_line = "-" * 60
     
     traceback_lines = traceback.format_exception(error, error, error.__traceback__)
     print(separator_line)
+    errortimestamp = datetime.utcnow().strftime('%Y/%m/%d %H:%M:%S.%f')[:-3]
     for line in traceback_lines:
         for subline in line.split('\n'):
-            _print(f"{COLORS.error_logs}[ERROR]{COLORS.normal_message} {subline}")
+            print(f"{COLORS.timestamp}[{errortimestamp}]{COLORS.reset} {COLORS.error_logs}[ERROR]{COLORS.normal_message} {subline}")
     print(separator_line)
 
-bot = commands.Bot(command_prefix=getprefix, bot_id = CONFIGS.botid, experimental_event_style=True, owner_ids=CONFIGS.owners)
+bot = commands.Bot(command_prefix=getprefix, bot_id = CONFIGS.botid, experimental_event_style=True, owner_ids=CONFIGS.owners, help_command=None)
 bot.CONFIGS = CONFIGS
 bot.COLORS = COLORS
-bot.remove_command("help")
 bot.print = _print
+bot.info = _infoprint
 bot.traceback = _tracebackprint
 
 @bot.event
@@ -115,7 +125,7 @@ async def on_ready():
         except commands.errors.ExtensionAlreadyLoaded:
             pass
 
-    bot.print(f'{COLORS.info_logs}[INFO] {COLORS.normal_message}Bot ready! Logged in as {COLORS.user_name}{bot.user}')
+    bot.info(f'Bot ready! Logged in as {COLORS.user_name}{bot.user}')
 
 if __name__ == '__main__':
     bot.run(CONFIGS.token)

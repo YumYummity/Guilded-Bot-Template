@@ -2,7 +2,7 @@ import guilded
 from guilded.ext import commands
 
 class help(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
     
     @commands.command(name='help', description='Help for every command this bot has!', aliases=['h'])
