@@ -31,6 +31,7 @@ This template includes:
 - You can use `bot.COLORS.cog_logs` to color a [COGS] log. (Use `bot.print`!)
     - Example: `bot.print(f"{bot.COLORS.cog_logs}[COGS]{bot.COLORS.normal_message} Loaded cog.")`
     - `error_logs`, `warn_logs`, `info_logs`, and `success_logs` are also available, but it is recommended to use the `bot.error()`, `bot.warn()`, `bot.info()`, and `bot.success()` functions instead.
+    - `guilded_logs` is available, but it is recommended to leave that to the `guilded.py` logger and not use it.
 - You can use `bot.COLORS.reset` to completely reset any formatting.
 - You can use `bot.COLORS.normal_message` to format normal text in logs.
 - `bot.COLORS.timestamp` exists as a color for the timestamps in front of a log message. You can use it to highlight any timestamps you may have.
