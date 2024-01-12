@@ -42,4 +42,5 @@ Edit the following `class` in `main.py` to change colors.
 # Setup
 1. Rename `config.json.txt` to `config.json`
 2. Fill out `config.json`
-3. Run `main.py`
+3. Install the required libraries. `pip install -r requirements.txt`
+4. Run `main.py`
