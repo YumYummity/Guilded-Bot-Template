@@ -186,5 +186,5 @@ if __name__ == '__main__':
         bot.run(CONFIGS.token)
     except Exception as e:
         bot.traceback(e)
-    bot.error("Bot stopped")
+    bot.info("Bot stopped")
     console_logger.info("\n")
