@@ -9,6 +9,7 @@ This template includes:
 - Eval/exec command
 - Config file
 - Replies on ping
+- Status changing in `tasks.py` cog
 
 # Logging
 - Use `bot.traceback(Exception)` to log and format errors. Otherwise, they won't be logged properly.
