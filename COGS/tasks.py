@@ -17,8 +17,11 @@ class tasks(commands.Cog):
                 [None, f"https://github.com/YumYummity/Guilded-Bot-Template/tree/main", 10]
             ]
             for status in statuses:
-                await self.bot.set_status(status[0] if status[0] else 90002547, status[1])
-                await asyncio.sleep(status[2])
+                try:
+                    await self.bot.set_status(status[0] if status[0] else 90002547, content=status[1])
+                    await asyncio.sleep(status[2])
+                except:
+                    pass
 
 def setup(bot):
 	bot.add_cog(tasks(bot))
