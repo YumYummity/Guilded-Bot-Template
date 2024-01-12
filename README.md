@@ -6,7 +6,7 @@ This template includes:
 - Advanced logging
 - Errors logging (when an error (traceback) occurs, it'll save to a txt file and tell the user the error ID)
 - Permission missing error handling (when a permission is missing, it'll tell the user exactly what permissions are missing)
-- Eval/exec
+- Eval/exec command
 - Config file
 - Replies on ping
 
@@ -19,3 +19,8 @@ This template includes:
 - Use `bot.error()` to print error messages.
 - Use `bot.success()` to print success messages.
 - Use `bot.warn()` to print warning messages.
+
+# Setup
+1. Rename `config.json.txt` to `config.json`
+2. Fill out `config.json`
+3. Run `main.py`
