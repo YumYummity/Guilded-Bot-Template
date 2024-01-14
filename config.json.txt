@@ -2,8 +2,13 @@
     "token": "Please star https://github.com/YumYummity/Guilded-Bot-Template if this helped you!",
     "bot_id": "guilded-bot-id",
     "bot_user_id": "guilded-bot-user-id",
+
     "support_server": "supportserver-id",
     "support_server_invite": "supportserver-invite",
+
     "default_prefix": "!",
-    "owners": ["list of owner ids"]
+    
+    "owners": ["list of owner ids"],
+
+    "server_join_leave": "channel-id-for-logs"
 }
