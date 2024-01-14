@@ -1,5 +1,5 @@
 {
-    "token": "",
+    "token": "Please star https://github.com/YumYummity/Guilded-Bot-Template if this helped you!",
     "bot_id": "guilded-bot-id",
     "bot_user_id": "guilded-bot-user-id",
     "support_server": "supportserver-id",
