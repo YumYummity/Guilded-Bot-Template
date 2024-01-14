@@ -25,6 +25,7 @@ class events(commands.Cog):
     
     @commands.Cog.listener("on_bot_add")
     async def server_joined(self, event: guilded.BotAddEvent):
+        self.bot.info(f"{self.bot.COLORS.user_name}{self.bot.user.name}{self.bot.COLORS.normal_message} joined the server {self.bot.COLORS.item_name}{event.server.name}")
         channel_id = self.bot.CONFIGS.join_leave_logs
         if channel_id:
             channel = self.bot.get_partial_messageable(channel_id)
@@ -34,11 +35,11 @@ class events(commands.Cog):
                 await channel.send(embed=embedig)
             except:
                 pass
-        default_channel = await event.server.fetch_default_channel()
-        embedig = guilded.Embed(title=f'Thanks for using {self.bot.user.name}!', description=f'I see you invited me, {event.user.mention}!\nThanks for inviting me!', color=guilded.Color.green())
-        embedig.set_footer(text='Hope you enjoy!')
-        embedig.timestamp = datetime.datetime.now(datetime.timezone.utc)
         try:
+            default_channel = await event.server.fetch_default_channel()
+            embedig = guilded.Embed(title=f'Thanks for using {self.bot.user.name}!', description=f'I see you invited me, {event.user.mention}!\nThanks for inviting me!', color=guilded.Color.green())
+            embedig.set_footer(text='Hope you enjoy!')
+            embedig.timestamp = datetime.datetime.now(datetime.timezone.utc)
             message = await default_channel.send(embed=embedig)
             prefix = self.bot.get_prefix(message)
             embedig = guilded.Embed(title=f'Thanks for using {self.bot.user.name}!', description=f'I see you invited me, {event.user.mention}!\nThanks for inviting me! The current prefix for this server is `{prefix}`.\n\nRun `{prefix}help` for help.', color=guilded.Color.green())
@@ -50,6 +51,7 @@ class events(commands.Cog):
 
     @commands.Cog.listener("on_bot_remove")
     async def server_left(self, event: guilded.BotRemoveEvent):
+        self.bot.info(f"{self.bot.COLORS.user_name}{self.bot.user.name}{self.bot.COLORS.normal_message} left the server {self.bot.COLORS.item_name}{event.server.name}")
         channel_id = self.bot.CONFIGS.join_leave_logs
         if channel_id:
             channel = self.bot.get_partial_messageable(channel_id)
