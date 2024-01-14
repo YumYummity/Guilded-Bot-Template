@@ -96,6 +96,7 @@ class CONFIGS():
     supportserverinv:str = configdata['support_server_invite']
     defaultprefix:str = configdata['default_prefix']
     owners:list = configdata['owners']
+    join_leave_logs:str|None = configdata['server_join_leave']
     error_logs_dir = errors_dir
     cogs_dir = cogspath
 

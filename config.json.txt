@@ -7,8 +7,8 @@
     "support_server_invite": "supportserver-invite",
 
     "default_prefix": "!",
-    
+
     "owners": ["list of owner ids"],
 
-    "server_join_leave": "channel-id-for-logs"
+    "server_join_leave": "channel-id-for-logs (THIS CAN BE NULL TO DISABLE!)"
 }
