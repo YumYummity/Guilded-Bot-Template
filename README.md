@@ -10,6 +10,7 @@ This template includes:
 - Config file
 - Replies on ping
 - Status changing in `tasks.py` cog
+- Optional join/leave logging
 
 # Logging
 - Use `bot.traceback(Exception)` to log and format errors. Otherwise, they won't be logged properly.
