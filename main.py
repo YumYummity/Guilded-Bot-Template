@@ -42,7 +42,7 @@ class COLORS():
     user_name = Fore.LIGHTCYAN_EX
 
 # Configure directories
-cogspath = "COGS/"
+cogspath = "COGS\\"
 cogspathpy = [os.path.basename(f) for f in glob.glob(f'{cogspath}*.py')]
 cogs = [f'{cogspath[:-1]}.' + os.path.splitext(f)[0] for f in cogspathpy]
 logs_dir = 'logs'

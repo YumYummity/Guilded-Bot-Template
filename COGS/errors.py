@@ -153,7 +153,7 @@ class errors(commands.Cog):
                 except Exception as e:
                     tb = ''.join(traceback.format_exception(e, e, e.__traceback__))
                     self.bot.traceback(e)
-                    with open(f'{self.bot.CONFIGS.error_logs_dir}/{randomrefcode}.txt', 'w+') as file:
+                    with open(f'{self.bot.CONFIGS.error_logs_dir}\\{randomrefcode}.txt', 'w+') as file:
                         file.write(tb)
                         file.close()
 
