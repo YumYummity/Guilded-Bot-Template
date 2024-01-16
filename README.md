@@ -1,16 +1,17 @@
 # Guilded Bot Template
 This template includes:
 - Basic help command
-- Cog handling
-- Cogs loading/unloading/reloading commands for owners
-- Advanced logging
-- Errors logging (when an error (traceback) occurs, it'll save to a txt file and tell the user the error ID)
-- Permission missing error handling (when a permission is missing, it'll tell the user exactly what permissions are missing)
-- Eval/exec command
+- Cogs
+- Developer commands
+    - Eval/Exec
+    - Cog load/reload/unload
+- Advanced logging and error handling
+    - Errors logging (when an error (traceback) occurs, it'll save to a txt file and tell the user the error ID)
+    - Permission missing error handling (when a permission is missing, it'll tell the user exactly what permissions are missing)
 - Config file
 - Replies on ping
 - Status changing in `tasks.py` cog
-- Optional join/leave logging
+- Join/leave logging, join message
 
 # Logging
 - Use `bot.traceback(Exception)` to log and format errors. Otherwise, they won't be logged properly.
