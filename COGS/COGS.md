@@ -5,6 +5,8 @@ A cog is a way to organize your commands and/or events into a file, which you ca
 
 As mentioned in the Final Comments section of the Overview: If you are having trouble with any of these steps (or understanding most of the code), `guilded.py` may be too advanced for you. Consider learning some more Python first.
 
+This does not contain everything you need to know about cogs, but rather some of the basics.
+
 ### Basic Code
 Let's take at the example code for a cog with no functionality. This guide assumes you are familiar with classes. If not, please familiarize yourself. Good resource: https://www.w3schools.com/python/python_classes.asp
 
