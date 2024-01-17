@@ -3,7 +3,7 @@
 # Guilded Bot Template
 This is a Guilded bot template for Python.
 
-There is a good `guilded.js` template here for `guilded.js` users: https://github.com/Rednexie/guilded-template
+There is a good template here for `guilded.js` users: https://github.com/Rednexie/guilded-template
 
 This template includes:
 - Basic help command
