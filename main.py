@@ -198,3 +198,4 @@ if __name__ == '__main__':
     except Exception as e:
         bot.traceback(e)
         bot.error("Bot crashed")
+    on_bot_stopped()
