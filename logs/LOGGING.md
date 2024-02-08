@@ -1,4 +1,4 @@
-[Overview](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/README.md) / [Setup](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Setup) / [Cogs](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/COGS/COGS.md) / **Logging** / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/EXAMPLES.md)
+[Overview](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/README.md) / [Setup](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Setup) / [Cogs](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Cogs) / **Logging** / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/EXAMPLES.md)
 
 # Logging
 - Use `bot.traceback(Exception)` to log and format errors. Otherwise, they won't be logged properly.
