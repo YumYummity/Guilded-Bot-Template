@@ -1,4 +1,4 @@
-[Overview](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/README.md) / [Setup](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/SETUP.md) / **Cogs** / [Logging](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/logs/LOGGING.md) / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/EXAMPLES.md)
+[Overview](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/README.md) / [Setup](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Setup) / **Cogs** / [Logging](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/logs/LOGGING.md) / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/EXAMPLES.md)
 
 # Cogs
 A cog is a way to organize your commands and/or events into a file, which you can then load. You can update commands by simply reloading a cog after you make changes, meaning this is a great way to modify your code without restarting the entire bot!
