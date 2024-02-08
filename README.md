@@ -1,4 +1,4 @@
-**Overview** / [Setup](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Setup) / [[Cogs]] / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/EXAMPLES.md)
+**Overview** / [Setup](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Setup) / [Cogs](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Cogs) / [Logging](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Logging) / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Examples)
 
 # Guilded Bot Template
 This is a Guilded bot template for Python.
