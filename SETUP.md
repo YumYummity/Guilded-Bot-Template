@@ -1,4 +1,4 @@
-[Overview](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/README.md) / **Setup** / [Cogs](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/COGS/COGS.md) / [Logging](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/logs/LOGGING.md)
+[Overview](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/README.md) / **Setup** / [Cogs](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/COGS/COGS.md) / [Logging](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/logs/LOGGING.md) / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/EXAMPLES.md)
 
 # Setup
 ## Getting Files
@@ -18,6 +18,9 @@ You can download this repository as a .zip file by using this link: https://gith
     - This should be at least 3.7.*
 4. Install the required libraries. `pip install -r requirements.txt`
 5. Run `main.py`
+
+### Optional
+You can read [Command Examples](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/COMMANDS/COMMANDS.md) to see some pre-built commands. These also come with a related guide.
 
 ### Debug Mode
 You can change the variable `debug_mode` in `main.py` to turn on `guilded.py` debug.
