@@ -158,7 +158,16 @@ def _tracebackprint(error: Exception):
     console_logger.info(separator_line)
     print(separator_line)
 
-bot = commands.Bot(command_prefix=getprefix, bot_id = CONFIGS.botid, experimental_event_style=True, owner_ids=CONFIGS.owners, help_command=None)
+bot = commands.Bot(
+    command_prefix=getprefix,
+    bot_id = CONFIGS.botid,
+    experimental_event_style = True,
+    # features = guilded.ClientFeatures(
+    #    experimental_event_style = True
+    # )
+    owner_ids=CONFIGS.owners,
+    help_command=None
+)
 bot.CONFIGS = CONFIGS
 bot.COLORS = COLORS
 # Logging
