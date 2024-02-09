@@ -26,22 +26,7 @@ async def fetch_channels(server: guilded.Server, client: guilded.Client | comman
     List[:class:`ServerChannel`]
         The channels of the server.
     """
-    token = client.http.token
-    if not token:
-        return []
-    
-    headers = {
-        "user-agent": client.http.user_agent,
-        "accept": "application/json, text/javascript, */*; q=0.01",
-        "authorization": f"Bearer {token}"
-    }
-
-    url = f"https://www.guilded.gg/api/teams/{server.id}/channels"
-    
-    async with client.http.session.get(url, headers=headers) as resp:
-        if resp.status != 200:
-            return []  # or raise an exception if needed
-        data = await resp.json()
+    data = await client.http.request(client.http.Route('GET', f'/teams/{server.id}/channels', override_base=client.http.Route.USER_BASE))
 
     channels = []
     for channel in data["channels"]:
