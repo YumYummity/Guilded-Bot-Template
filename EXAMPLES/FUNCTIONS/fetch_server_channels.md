@@ -1,0 +1,59 @@
+Back to [Example Functions](https://github.com/YumYummity/Guilded-Bot-Template/blob/main/EXAMPLES/FUNCTIONS/FUNCTIONS.md)
+
+> [!WARNING]
+> This is not officially supported code. This implementation is a hacky way involving the user api.
+>
+> This may be patched at any time.
+
+# The Fetch Channels Function
+While there is an explanation for the code here, this is not a guide. Do not ask for support for understanding this function.
+
+### The Code
+```python
+import guilded
+from guilded.ext import commands
+from typing import List
+
+async def fetch_channels(server: guilded.Server, client: guilded.Client | commands.Bot) -> List[guilded.abc.ServerChannel]:
+    """|coro|
+
+    Fetch the list of channels in a server.
+
+    Returns
+    --------
+    List[:class:`ServerChannel`]
+        The channels of the server.
+    """
+    token = client.http.token
+    if not token:
+        return []
+    
+    headers = {
+        "user-agent": client.http.user_agent,
+        "accept": "application/json, text/javascript, */*; q=0.01",
+        "authorization": f"Bearer {token}"
+    }
+
+    url = f"https://www.guilded.gg/api/teams/{server.id}/channels"
+    
+    async with client.http.session.get(url, headers=headers) as resp:
+        if resp.status != 200:
+            return []  # or raise an exception if needed
+        data = await resp.json()
+
+    channels = []
+    for channel in data["channels"]:
+        channel["serverId"] = channel["teamId"]
+        channel_object = client.http.create_channel(data=channel)
+        channels.append(channel_object)
+        client.http.add_to_server_channel_cache(channel_object)
+    return channels
+```
+
+### Example Usage
+Putting the code into a file called `utilities.py`:
+```python
+from utilities import fetch_channels
+
+await fetch_channels(server, client)
+```
