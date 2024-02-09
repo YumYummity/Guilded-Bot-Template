@@ -61,5 +61,5 @@ Putting the code into a file called `utilities.py`:
 from utilities import fetch_channels
 
 async def some_command(ctx: commands.Context):
-    channels = await fetch_channels(ctxserver, ctx.bot)
+    channels = await fetch_channels(ctx.server, ctx.bot)
 ```
