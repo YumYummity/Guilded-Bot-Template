@@ -6,9 +6,11 @@ Back to [Example Functions](https://github.com/YumYummity/Guilded-Bot-Template/b
 > This may be patched at any time.
 
 # The Fetch Channels Function
-While there is an explanation for the code here, this is not a guide. Do not ask for support for understanding this function.
+This is not a guide. This is the plain code for how to fetch a server's channels.
 
-### The Code
+This was made to mimic `guilded.py` as much as possible. It also caches these into `guilded.py` like `fetch_channel` does.
+
+## The Code
 ```python
 import guilded
 from guilded.ext import commands
@@ -50,10 +52,14 @@ async def fetch_channels(server: guilded.Server, client: guilded.Client | comman
     return channels
 ```
 
+## Usage
+The arguments you need to pass are the `server` and `client/bot`.
+
 ### Example Usage
 Putting the code into a file called `utilities.py`:
 ```python
 from utilities import fetch_channels
 
-await fetch_channels(server, client)
+async def some_command(ctx: commands.Context):
+    channels = await fetch_channels(ctxserver, ctx.bot)
 ```
