@@ -3,6 +3,13 @@
 # Guilded Bot Template
 This is a Guilded bot template for Python.
 
+> [!NOTE]
+> If you are here for the provided example code, please see [Examples](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Examples)
+>
+> Current Examples:
+> - Command: Starting a User Info
+> - Function: Fetching Channels from a Server
+
 There is a good template here for `guilded.js` users: https://github.com/Rednexie/guilded-template
 
 This template includes:
@@ -18,7 +25,7 @@ This template includes:
 - Replies on ping
 - Status changing in `tasks.py` cog
 - Join/leave logging, join message
-- Example commands and addons
+- Examples of commands, functions, and more!
 
 > [!IMPORTANT]  
 > This template uses the **experimental event style** provided by `guilded.py`.
