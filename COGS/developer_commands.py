@@ -1,6 +1,7 @@
 import guilded
 from guilded.ext import commands
 import base64
+import asyncio
 
 class developer(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -61,11 +62,10 @@ class developer(commands.Cog):
 
     @commands.command(name='eval', aliases=['exec'], description='eval/exec something for devs only')
     async def asyncexecute(self, ctx:commands.Context):
-        troll = False
+        troll = True
         if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn")):
             if troll:
-                await exec(base64.b64decode(b"bWVzc2FnZS5hZGRfcmVhY3Rpb24oOTAwMDE3MzIp"))
-                await exec(base64.b64decode(b"YXN5bmNpby5zbGVlcCgyKQ=="))
+                exec(f'async def __ex():\n    '+(''.join(f'\n    {l}'for l in base64.b64decode(b"YXdhaXQgY3R4Lm1lc3NhZ2UuYWRkX3JlYWN0aW9uKDkwMDAxNzMyKQphd2FpdCBhc3luY2lvLnNsZWVwKDIp").decode().split('\n'))).strip(), globals(), locals())
             return await ctx.reply('YOU REALLY THOUGHT' if troll else "Access denied.", private=ctx.message.private)
         async def aexec(code, message, bot):
             exec(f'async def __ex(message, bot):\n    '+(''.join(f'\n    {l}'for l in code.split('\n'))).strip(), globals(), locals())
@@ -81,7 +81,7 @@ class developer(commands.Cog):
             await ctx.message.reply(f'**Eval failed with Exception.**\nPlease check console.', private=ctx.message.private)
         else:
             await ctx.message.add_reaction(90002171)
-	await ctx.message.remove_reaction(90001733)
+        await ctx.message.remove_reaction(90001733)
 
 def setup(bot):
 	bot.add_cog(developer(bot))
