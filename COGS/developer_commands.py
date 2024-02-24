@@ -2,6 +2,8 @@ import guilded
 from guilded.ext import commands
 import base64
 import asyncio
+import glob
+import os
 
 class developer(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -11,58 +13,104 @@ class developer(commands.Cog):
     async def load(self, ctx:commands.Context, *, cog_name: str):
         if not ctx.author.id in self.bot.CONFIGS.owners:
             return await ctx.reply('No.', private=ctx.message.private)
+        ocog_name = cog_name
 
         if not cog_name.startswith(f'{self.bot.CONFIGS.cogs_dir[:-1]}.'):
             cog_name = f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog_name
         try:
             self.bot.load_extension(cog_name)
             self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Loaded cog {self.bot.COLORS.item_name}{cog_name}')
+            em = guilded.Embed(description="**Cog loaded.**", color=0x363942)
+            await ctx.reply(embed=em, private=ctx.message.private)
         except Exception as e:
+            if ocog_name == "all":
+                cogspathpy = [os.path.basename(f) for f in glob.glob(f'{self.bot.CONFIGS.cogs_dir}*.py')]
+                cogs = [f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + os.path.splitext(f)[0] for f in cogspathpy]
+                for cog in cogs:
+                    try:
+                        self.bot.load_extension(f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog)
+                        self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Loaded cog {self.bot.COLORS.item_name}{cog_name}')
+                    except commands.ExtensionAlreadyLoaded:
+                        em = guilded.Embed(description=f"Cog `{cog}` is already loaded.", color=0x363942)
+                        await ctx.reply(embed=em, private=ctx.message.private)
+                    except Exception as e:
+                        em = guilded.Embed(description=f"Failed to load cog `{cog}`", color=0x363942)
+                        await ctx.reply(embed=em, private=ctx.message.private)
+                        self.bot.traceback(e)
+                em = guilded.Embed(description="**All cogs loaded.**", color=0x363942)
+                await ctx.reply(embed=em, private=ctx.message.private)
+                return
             em = guilded.Embed(description="Failed to load cog.", color=0x363942)
             await ctx.reply(embed=em, private=ctx.message.private)
             self.bot.traceback(e)
-        else:
-            em = guilded.Embed(description="**Cog loaded.**", color=0x363942)
-            await ctx.reply(embed=em, private=ctx.message.private)
 
     @commands.command(name='unload', description='Unloads a cog.')
     async def unload(self, ctx:commands.Context, *, cog_name: str):
         if not ctx.author.id in self.bot.CONFIGS.owners:
             return await ctx.reply('No.', private=ctx.message.private)
+        ocog_name = cog_name
         if not cog_name.startswith(f'{self.bot.CONFIGS.cogs_dir[:-1]}.'):
             cog_name = f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog_name
 
-        if cog_name in self.bot.extensions:
-            self.bot.unload_extension(cog_name)
-            self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Unloaded cog {self.bot.COLORS.item_name}{cog_name}')
-            em = guilded.Embed(description="**Cog unloaded.**", color=0x363942)
-            await ctx.reply(embed=em, private=ctx.message.private)
+        if ocog_name == "all" and (not cog_name in self.bot.extensions):
+            for cog in self.bot.extensions:
+                if cog in self.bot.extensions:
+                    try:
+                        self.bot.unload_extension(cog)
+                        self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Unloaded cog {self.bot.COLORS.item_name}{cog_name}')
+                    except commands.ExtensionNotLoaded:
+                        pass
+                else:
+                    em = guilded.Embed(description=f"`{cog}` cog isn't loaded.", color=0x363942)
+                    await ctx.reply(embed=em, private=ctx.message.private)
+                em = guilded.Embed(description="**All cogs unloaded.**", color=0x363942)
+                await ctx.reply(embed=em, private=ctx.message.private)
         else:
-            em = guilded.Embed(description="That cog isn't loaded.", color=0x363942)
-            await ctx.reply(embed=em, private=ctx.message.private)
+            if cog_name in self.bot.extensions:
+                try:
+                    self.bot.unload_extension(cog)
+                    self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Unloaded cog {self.bot.COLORS.item_name}{cog_name}')
+                except commands.ExtensionNotLoaded:
+                    pass
+                em = guilded.Embed(description="**Cog unloaded.**", color=0x363942)
+                await ctx.reply(embed=em, private=ctx.message.private)
+            else:
+                em = guilded.Embed(description="That cog isn't loaded.", color=0x363942)
+                await ctx.reply(embed=em, private=ctx.message.private)
 
     @commands.command(name='reload', description='Reloads a cog.')
     async def reload(self, ctx:commands.Context, *, cog_name: str = None):
         if not ctx.author.id in self.bot.CONFIGS.owners:
             return await ctx.reply('No.', private=ctx.message.private)
+        ocog_name = cog_name
         if not cog_name.startswith(f'{self.bot.CONFIGS.cogs_dir[:-1]}.'):
             cog_name = f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog_name
 
-        try:
-            self.bot.unload_extension(cog_name)
-            self.bot.load_extension(cog_name)
-            self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Reloaded cog {self.bot.COLORS.item_name}{cog_name}')
-        except Exception as e:
-            em = guilded.Embed(description="Failed to reload cog.", color=0x363942)
+        if ocog_name == "all" and (not cog_name in self.bot.extensions):
+            for cog in self.bot.extensions:
+                try:
+                    self.bot.reload_extension(cog)
+                    self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Reloaded cog {self.bot.COLORS.item_name}{cog_name}')
+                except Exception as e:
+                    em = guilded.Embed(description=f"Failed to reload cog `{cog}`", color=0x363942)
+                    await ctx.reply(embed=em, private=ctx.message.private)
+                    self.bot.traceback(e)
+            em = guilded.Embed(description="**All cogs reloaded.**", color=0x363942)
             await ctx.reply(embed=em, private=ctx.message.private)
-            self.bot.traceback(e)
         else:
-            em = guilded.Embed(description="**Cog reloaded.**", color=0x363942)
-            await ctx.reply(embed=em, private=ctx.message.private)
+            try:
+                self.bot.reload_extension(cog_name)
+                self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Reloaded cog {self.bot.COLORS.item_name}{cog_name}')
+                em = guilded.Embed(description="**Cog reloaded.**", color=0x363942)
+                await ctx.reply(embed=em, private=ctx.message.private)
+            except Exception as e:
+                em = guilded.Embed(description="Failed to reload cog.", color=0x363942)
+                await ctx.reply(embed=em, private=ctx.message.private)
+                self.bot.traceback(e)
 
     @commands.command(name='eval', aliases=['exec'], description='eval/exec something for devs only')
     async def asyncexecute(self, ctx:commands.Context):
-        troll = True
+        troll = False # do you want to troll someone who tries to run eval without permissions?
         if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn")):
             if troll:
                 await ctx.message.add_reaction(90001732)
