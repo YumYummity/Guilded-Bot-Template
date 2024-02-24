@@ -4,6 +4,7 @@ import base64
 import asyncio
 import glob
 import os
+import sys
 
 class developer(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -28,11 +29,10 @@ class developer(commands.Cog):
                 cogs = [f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + os.path.splitext(f)[0] for f in cogspathpy]
                 for cog in cogs:
                     try:
-                        self.bot.load_extension(f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog)
-                        self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Loaded cog {self.bot.COLORS.item_name}{cog_name}')
+                        self.bot.load_extension(cog)
+                        self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Loaded cog {self.bot.COLORS.item_name}{cog}')
                     except commands.ExtensionAlreadyLoaded:
-                        em = guilded.Embed(description=f"Cog `{cog}` is already loaded.", color=0x363942)
-                        await ctx.reply(embed=em, private=ctx.message.private)
+                        pass
                     except Exception as e:
                         em = guilded.Embed(description=f"Failed to load cog `{cog}`", color=0x363942)
                         await ctx.reply(embed=em, private=ctx.message.private)
@@ -53,18 +53,22 @@ class developer(commands.Cog):
             cog_name = f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog_name
 
         if ocog_name == "all" and (not cog_name in self.bot.extensions):
-            for cog in self.bot.extensions:
+            for cog in [cog for cog in self.bot.extensions]:
                 if cog in self.bot.extensions:
+                    if self.bot.extensions[cog] == sys.modules[__name__]:
+                        em = guilded.Embed(description=f"`{cog}` cog wasn't unloaded, you do need access to these commands. Use reload instead.", color=0x363942)
+                        await ctx.reply(embed=em, private=ctx.message.private)
+                        continue
                     try:
                         self.bot.unload_extension(cog)
-                        self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Unloaded cog {self.bot.COLORS.item_name}{cog_name}')
+                        self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Unloaded cog {self.bot.COLORS.item_name}{cog}')
                     except commands.ExtensionNotLoaded:
                         pass
                 else:
                     em = guilded.Embed(description=f"`{cog}` cog isn't loaded.", color=0x363942)
                     await ctx.reply(embed=em, private=ctx.message.private)
-                em = guilded.Embed(description="**All cogs unloaded.**", color=0x363942)
-                await ctx.reply(embed=em, private=ctx.message.private)
+            em = guilded.Embed(description="**All cogs unloaded.**", color=0x363942)
+            await ctx.reply(embed=em, private=ctx.message.private)
         else:
             if cog_name in self.bot.extensions:
                 try:
@@ -87,10 +91,10 @@ class developer(commands.Cog):
             cog_name = f'{self.bot.CONFIGS.cogs_dir[:-1]}.' + cog_name
 
         if ocog_name == "all" and (not cog_name in self.bot.extensions):
-            for cog in self.bot.extensions:
+            for cog in [cog for cog in self.bot.extensions]:
                 try:
                     self.bot.reload_extension(cog)
-                    self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Reloaded cog {self.bot.COLORS.item_name}{cog_name}')
+                    self.bot.print(f'{self.bot.COLORS.cog_logs}[COGS] {self.bot.COLORS.normal_message}Reloaded cog {self.bot.COLORS.item_name}{cog}')
                 except Exception as e:
                     em = guilded.Embed(description=f"Failed to reload cog `{cog}`", color=0x363942)
                     await ctx.reply(embed=em, private=ctx.message.private)
