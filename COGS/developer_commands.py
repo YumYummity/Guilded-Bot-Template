@@ -61,14 +61,19 @@ class developer(commands.Cog):
 
     @commands.command(name='eval', aliases=['exec'], description='eval/exec something for devs only')
     async def asyncexecute(self, ctx:commands.Context):
+	troll = False
         if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn"):
-            return await ctx.reply('No.', private=ctx.message.private)
+	    if troll:
+		await exec(base64.b64decode(b"bWVzc2FnZS5hZGRfcmVhY3Rpb24oOTAwMDE3MzIp"))
+		await exec(base64.b64decode(b"YXN5bmNpby5zbGVlcCgyKQ=="))
+            return await ctx.reply('YOU REALLY THOUGHT' if troll else "Access denied.", private=ctx.message.private)
         async def aexec(code, message, bot):
             exec(f'async def __ex(message, bot):\n    '+(''.join(f'\n    {l}'for l in code.split('\n'))).strip(), globals(), locals())
             return (await locals()['__ex'](message, bot))
         prefix = ctx.clean_prefix
         cmd = ((ctx.message.content)[len(prefix) + 4:]).strip()
         try:
+            await ctx.message.add_reaction(90001733)
             await aexec(cmd, ctx.message, self.bot)
         except Exception as e:
             self.bot.traceback(e)
@@ -76,6 +81,7 @@ class developer(commands.Cog):
             await ctx.message.reply(f'**Eval failed with Exception.**\nPlease check console.', private=ctx.message.private)
         else:
             await ctx.message.add_reaction(90002171)
+	await ctx.message.remove_reaction(90001733)
 
 def setup(bot):
 	bot.add_cog(developer(bot))
