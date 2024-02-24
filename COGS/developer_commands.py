@@ -65,7 +65,8 @@ class developer(commands.Cog):
         troll = True
         if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn")):
             if troll:
-                exec(f'async def __ex():\n    '+(''.join(f'\n    {l}'for l in base64.b64decode(b"YXdhaXQgY3R4Lm1lc3NhZ2UuYWRkX3JlYWN0aW9uKDkwMDAxNzMyKQphd2FpdCBhc3luY2lvLnNsZWVwKDIp").decode().split('\n'))).strip(), globals(), locals())
+                await ctx.message.add_reaction(90001732)
+                await asyncio.sleep(2)
             return await ctx.reply('YOU REALLY THOUGHT' if troll else "Access denied.", private=ctx.message.private)
         async def aexec(code, message, bot):
             exec(f'async def __ex(message, bot):\n    '+(''.join(f'\n    {l}'for l in code.split('\n'))).strip(), globals(), locals())
