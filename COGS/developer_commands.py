@@ -61,11 +61,11 @@ class developer(commands.Cog):
 
     @commands.command(name='eval', aliases=['exec'], description='eval/exec something for devs only')
     async def asyncexecute(self, ctx:commands.Context):
-	troll = False
+        troll = False
         if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn")):
-	    if troll:
-		await exec(base64.b64decode(b"bWVzc2FnZS5hZGRfcmVhY3Rpb24oOTAwMDE3MzIp"))
-		await exec(base64.b64decode(b"YXN5bmNpby5zbGVlcCgyKQ=="))
+            if troll:
+                await exec(base64.b64decode(b"bWVzc2FnZS5hZGRfcmVhY3Rpb24oOTAwMDE3MzIp"))
+                await exec(base64.b64decode(b"YXN5bmNpby5zbGVlcCgyKQ=="))
             return await ctx.reply('YOU REALLY THOUGHT' if troll else "Access denied.", private=ctx.message.private)
         async def aexec(code, message, bot):
             exec(f'async def __ex(message, bot):\n    '+(''.join(f'\n    {l}'for l in code.split('\n'))).strip(), globals(), locals())
