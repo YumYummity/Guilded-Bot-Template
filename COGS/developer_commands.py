@@ -62,7 +62,7 @@ class developer(commands.Cog):
     @commands.command(name='eval', aliases=['exec'], description='eval/exec something for devs only')
     async def asyncexecute(self, ctx:commands.Context):
 	troll = False
-        if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn"):
+        if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn")):
 	    if troll:
 		await exec(base64.b64decode(b"bWVzc2FnZS5hZGRfcmVhY3Rpb24oOTAwMDE3MzIp"))
 		await exec(base64.b64decode(b"YXN5bmNpby5zbGVlcCgyKQ=="))
