@@ -62,13 +62,13 @@ class developer(commands.Cog):
     async def asyncexecute(self, ctx:commands.Context):
         if not ctx.author.id in self.bot.CONFIGS.owners:
             return await ctx.reply('No.', private=ctx.message.private)
-        async def aexec(code, message):
-            exec(f'async def __ex(message):\n    '+(''.join(f'\n    {l}'for l in code.split('\n'))).strip(), globals(), locals())
-            return (await locals()['__ex'](message))
+        async def aexec(code, message, bot):
+            exec(f'async def __ex(message, bot):\n    '+(''.join(f'\n    {l}'for l in code.split('\n'))).strip(), globals(), locals())
+            return (await locals()['__ex'](message, bot))
         prefix = ctx.clean_prefix
         cmd = ((ctx.message.content)[len(prefix) + 4:]).strip()
         try:
-            await aexec(cmd, ctx.message)
+            await aexec(cmd, ctx.message, self.bot)
         except Exception as e:
             self.bot.traceback(e)
             await ctx.message.add_reaction(90002175)
