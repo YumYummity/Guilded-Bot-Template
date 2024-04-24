@@ -33,11 +33,7 @@ async def fetch_channels(server: guilded.Server, client: guilded.Client | comman
         channel["serverId"] = channel["teamId"]
         channel_object = client.http.create_channel(data=channel)
         channels.append(channel_object)
-        # Bot DM channels do not exist yet, but this prevents the server channel cache from breaking when they are added.
-        if channel_object.type == guilded.ChannelType.dm:
-            client.http.add_to_dm_channel_cache(channel_object)
-        else:
-            client.http.add_to_server_channel_cache(channel_object)
+        client.http.add_to_server_channel_cache(channel_object)
     return channels
 ```
 
