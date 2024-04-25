@@ -32,6 +32,8 @@ This template includes:
 > 
 > As of 2024/02/08, `guilded.py`'s current master branch has deprecated the `experimental_event_style=True` and replaced it with `guilded.ClientFeatures(experimental_event_style=True)`. If you are using `guilded.py` from github (and not pypi), please use the commented code inside `main.py` at line 165 (and remove `experimental_event_style=True`)
 >
+> As of `guilded.py >= 1.13`, `experimental_event_style=True` has been deprecated and replaced. The code has been updated to include these changes.
+> 
 > An `on_message` event looks like this without it:
 > ```python
 > @bot.event

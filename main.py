@@ -161,10 +161,9 @@ def _tracebackprint(error: Exception):
 bot = commands.Bot(
     command_prefix=getprefix,
     bot_id = CONFIGS.botid,
-    experimental_event_style = True,
-    # features = guilded.ClientFeatures(
-    #    experimental_event_style = True
-    # )
+    features = guilded.ClientFeatures(
+       experimental_event_style = True
+    ),
     owner_ids=CONFIGS.owners,
     help_command=None
 )
