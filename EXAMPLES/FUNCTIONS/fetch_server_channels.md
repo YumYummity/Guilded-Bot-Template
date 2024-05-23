@@ -14,6 +14,7 @@ This was made to mimic `guilded.py` as much as possible. It also caches these in
 ```python
 import guilded
 from guilded.ext import commands
+from guilded.http import Route
 from typing import List
 
 async def fetch_channels(server: guilded.Server, client: guilded.Client | commands.Bot) -> List[guilded.abc.ServerChannel]:
@@ -26,7 +27,7 @@ async def fetch_channels(server: guilded.Server, client: guilded.Client | comman
     List[:class:`ServerChannel`]
         The channels of the server.
     """
-    data = await client.http.request(client.http.Route('GET', f'/teams/{server.id}/channels', override_base=client.http.Route.USER_BASE))
+    data = await client.http.request(Route('GET', f'/teams/{server.id}/channels', override_base=Route.USER_BASE))
 
     channels = []
     for channel in data["channels"]:

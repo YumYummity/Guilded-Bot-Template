@@ -8,7 +8,7 @@
 
     "default_prefix": "!",
 
-    "owners": ["list of owner ids"],
+    "owners": ["list of owner ids",  "4WG7wrP4"],
 
     "server_join_leave": "channel-id-for-logs (THIS CAN BE NULL TO DISABLE!)"
 }
