@@ -1,4 +1,8 @@
-debug_mode = False
+import sys
+
+debug_mode = sys.argv[-1] == "-d"
+
+# Turn on debug by running main.py with the -d flag
 
 import guilded
 from guilded.ext import commands
@@ -162,7 +166,8 @@ bot = commands.Bot(
     command_prefix=getprefix,
     bot_id = CONFIGS.botid,
     features = guilded.ClientFeatures(
-       experimental_event_style = True
+       experimental_event_style = True,
+       official_markdwon = True
     ),
     owner_ids=CONFIGS.owners,
     help_command=None
