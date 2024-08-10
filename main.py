@@ -167,7 +167,7 @@ bot = commands.Bot(
     bot_id = CONFIGS.botid,
     features = guilded.ClientFeatures(
        experimental_event_style = True,
-       official_markdwon = True
+       official_markdown = True
     ),
     owner_ids=CONFIGS.owners,
     help_command=None
