@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> Guilded has shut down. This repository will be archived.
+
 **Overview** / [Setup](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Setup) / [Cogs](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Cogs) / [Logging](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Logging) / [Examples](https://github.com/YumYummity/Guilded-Bot-Template/wiki/Examples)
 
 # Guilded Bot Template
@@ -58,3 +61,4 @@ If you are having trouble with any of these steps (or understanding most of the 
 For questions about `guilded.py`, consider reading https://guildedpy.readthedocs.io/ and asking questions in the official `guilded.py` support server https://guilded.gg/gpy.
 
 If you have questions/feedback about this template (or something specific to this template), feel free to DM me on Guilded (I won't accept friend requests, but I respond to DMs). Please check the included information. Please use the issues tab for issues including errors, wrong information and suggestions.
+
